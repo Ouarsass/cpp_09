@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:44:33 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/14 20:45:03 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/15 20:27:20 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ class RPN
 {
 private:
     /* data */
+    
 public:
     RPN(/* args */);
     ~RPN();
