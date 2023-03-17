@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:26:51 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/17 19:32:19 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/17 20:10:40 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ public:
     BitcoinExchange();
     ~BitcoinExchange();
 	BitcoinExchange & operator=(const BitcoinExchange &obg);
-
 };
 
 #endif

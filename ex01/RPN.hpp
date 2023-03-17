@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:44:33 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/15 20:27:20 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/17 20:18:21 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,22 @@
 #define RPN_HPP
 
 #include <iostream>
+#include <stack>
 
 class RPN
 {
 private:
-    /* data */
-    
+	std::stack<int> myStack;
 public:
-    RPN(/* args */);
-    ~RPN();
+	RPN(const RPN &obg);
+	RPN(std::string str);
+	~RPN();
+	std::stack<int> getStack() const;
+	void print()
+	{
+		std::cout << myStack.top() << std::endl;
+    }
+	RPN &operator=(const RPN &obg);
 };
 
 #endif

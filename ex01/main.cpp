@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:39:03 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/15 20:27:15 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/17 20:28:05 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,11 @@
 
 int     main(int argc, char *argv[])
 {
-    if (argc =! 2)
+    if (argc != 2)
     {
-        
+        std::cerr << "Error " << std::endl;
     }
+    RPN ReversePolishNotation(argv[1]);
+    ReversePolishNotation.print();
+    return 0;
 }
