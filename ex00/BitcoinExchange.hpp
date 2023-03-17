@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:26:51 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/15 20:45:35 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/17 19:23:10 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 
 #include <iostream>
 
-class BTC
+class BitcoinExchange
 {
 private:
-    /* data */
+	std::string _date;
+	float _btc;
+	int _err;
 public:
-    BTC(/* args */);
-    ~BTC();
+    BitcoinExchange();
+    ~BitcoinExchange();
 };
 
 #endif
