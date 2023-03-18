@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:39:03 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/17 20:28:05 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/18 04:22:33 by mustapha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,19 @@ int     main(int argc, char *argv[])
     }
     RPN ReversePolishNotation(argv[1]);
     ReversePolishNotation.print();
+    return 0;
+}
+
+int main(int argc, char **argv)
+{
+    // Vérifie le nombre d'argument
+    if (argc == 2)
+    {
+        // Lance une instance et lance la méthode add_data
+        RPN rpn;
+        rpn.add_data(argv[1]);
+    }
+    else
+        std::cout << "Error" << std::endl;
     return 0;
 }
