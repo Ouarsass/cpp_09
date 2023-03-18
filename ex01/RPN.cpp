@@ -3,46 +3,35 @@
 /*                                                        :::      ::::::::   */
 /*   RPN.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:27:06 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 04:20:29 by mustapha         ###   ########.fr       */
+/*   Updated: 2023/03/18 13:20:57 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 
+RPN::RPN(){}
 
-// Constructeur par défaut de la classe RPN.
-RPN::RPN()
+RPN::~RPN(){}
+ 
+RPN::RPN(RPN const &obg)
 {
+    *this = obg;
 }
 
-// Destructeur de la classe RPN
-RPN::~RPN()
+RPN &RPN::operator=(RPN const &obg)
 {
+    if (this != &obg)
+        this->stack = obg.stack;
+    return (*this);
 }
 
-// Constructeur de copie 
-RPN::RPN(RPN const & src)
-{
-    *this = src;
-}
-
-
-// Opérateur d'assignation qui effectue une copie de l'objet source sur l'objet courant
-RPN & RPN::operator=(RPN const & rhs)
-{
-    if (this != &rhs) {
-        this->stack = rhs.stack;
-    }
-    return *this;
-}
-
-void RPN::add_data(std::string data)
+void RPN::add_data(std::string dataBase)
 {
     std::stack<int> stack; //Création d'une pile (stack) pour stocker les opérandes.
-    std::stringstream ss(data); //Utilisation d'un stringstream pour extraire chaque élément de la chaîne de caractères passée en argument.
+    std::stringstream ss(dataBase); //Utilisation d'un stringstream pour extraire chaque élément de la chaîne de caractères passée en argument.
     std::string token;
     //Boucle while pour parcourir tous les éléments extraits de la chaîne de caractères.
     while (ss >> token)
@@ -52,36 +41,33 @@ void RPN::add_data(std::string data)
             stack.push(atoi(token.c_str()));
         else if (token.size() > 1 || isdigit(token[0]))
         {
-            std::cout << "Error" << std::endl;
+            std::cerr << "Error" << std::endl;
             return;
         }
         // Si l'élément est un opérateur (+, -, *, /), on vérifie qu'il y a au moins 2 opérandes dans la pile.
         // Si ce n'est pas le cas, on affiche une erreur.
         // Sinon, on dépile les 2 dernières opérandes et on applique l'opération correspondante avant de rempiler le résultat.
-        else if (token[0] == '+' || token[0] == '-' || token[0] == '*' || token[0] == '/')
+        else if (token[0] == '*' || token[0] == '/' || token[0] == '+' || token[0] == '-')
         {
             if (stack.size() < 2)
-            {
-                std::cout << "Error: not enough operands" << std::endl;
-                return;
-            }
-            int b = stack.top();
+                {std::cerr << "Error: not enough operands" << std::endl;return;}
+            int second = stack.top();
             stack.pop();
-            int a = stack.top();
+            int first = stack.top();
             stack.pop();
             switch (token[0])
             {
                 case '+':
-                    stack.push(a + b);
+                    stack.push(first + second);
                     break;
                 case '-':
-                    stack.push(a - b);
+                    stack.push(first - second);
                     break;
                 case '*':
-                    stack.push(a * b);
+                    stack.push(first * second);
                     break;
                 case '/':
-                    stack.push(a / b);
+                    stack.push(first / second);
                     break;
             }
         }
@@ -96,7 +82,7 @@ void RPN::add_data(std::string data)
         {
             if (stack.empty() || stack.top() != '(')
             {
-                std::cout << "Error" << std::endl;
+                std::cerr << "Error" << std::endl;
                 return;
             }
             stack.pop();
@@ -106,7 +92,7 @@ void RPN::add_data(std::string data)
     // Si ce n'est pas le cas, on affiche une erreur. Sinon, on affiche le résultat final.
     if (stack.size() != 1)
     {
-        std::cout << "Error: too many operands" << std::endl;
+        std::cerr << "Error: too many operands" << std::endl;
         return;
     }
     std::cout << stack.top() << std::endl;

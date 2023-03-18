@@ -6,7 +6,7 @@ OBJS = $(SRCS:.cpp=.o)
 all:$(NAME)
 $(NAME) : $(OBJS)
 	c++ $(CPPFLAG) $(OBJS) -o $(NAME)
-%.o : %.cpp Fixed.hpp
+%.o : %.cpp RPN.hpp
 	c++ $(CPPFLAG) -c $< -o $@
 clean:
 	rm -f $(OBJS)
