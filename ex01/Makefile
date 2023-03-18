@@ -1,4 +1,4 @@
-NAME = ReversePolishNotation
+NAME = RPN
 CPPFLAG = -Wall -Wextra -Werror -std=c++98
 SRCS =  RPN.cpp \
 		main.cpp

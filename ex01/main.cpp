@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 20:39:03 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 13:51:59 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/18 14:42:58 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,6 @@ int     main(int argc, char *argv[])
         return (1);
     }
     RPN ReversePolishNotation;
-    ReversePolishNotation.add_data(argv[1]);
+    ReversePolishNotation.dataBase(argv[1]);
     return (0);
 }
