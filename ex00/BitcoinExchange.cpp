@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:31:13 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 04:10:30 by mustapha         ###   ########.fr       */
+/*   Updated: 2023/03/18 13:03:54 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ BitcoinExchange::BitcoinExchange(const std::string& bitcoinPricesFile)
         (*m_prices)[dateStr] = price;
     }
 }
+
 
 // Constructeur de copie qui copie la map
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)

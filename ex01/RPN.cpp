@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:27:06 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 16:25:58 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/18 16:31:45 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ RPN &RPN::operator=(RPN const &obg)
 void RPN::dataBase(std::string dataBase)
 {
     std::stack<int> stocker; //Création d'une pile (stack) pour stocker les opérandes.
-    std::stringstream ss(dataBase); //Utilisation d'un stringstream pour extraire chaque élément de la chaîne de caractères passée en argument.
+    std::stringstream sstream(dataBase); //Utilisation d'un stringstream pour extraire chaque élément de la chaîne de caractères passée en argument.
     std::string token;
     //Boucle while pour parcourir tous les éléments extraits de la chaîne de caractères.
-    while (ss >> token)
+    while (sstream >> token)
     {
         // Si le premier caractère de l'élément est un chiffre, on le convertit en entier et on l'ajoute à la pile.
         if (isdigit(token[0]))
@@ -89,9 +89,6 @@ void RPN::dataBase(std::string dataBase)
     // Après avoir parcouru tous les éléments, on vérifie qu'il ne reste qu'une seule opérande dans la pile.
     // Si ce n'est pas le cas, on affiche une erreur. Sinon, on affiche le résultat final.
     if (stocker.size() != 1)
-    {
-        std::cerr << "Error: too many operands" << std::endl;
-        return;
-    }
+        {std::cerr << "Error: in syntax" << std::endl;return;}
     std::cout << stocker.top() << std::endl;
 }
