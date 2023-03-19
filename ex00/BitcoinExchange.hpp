@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:26:51 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 13:04:00 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:09:36 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,18 @@
 #include <sstream>
 #include <iostream>
 
-class BitcoinExchange {
-	
-	public:
-		BitcoinExchange(const std::string& bitcoinPricesFile);
-		BitcoinExchange(const BitcoinExchange& other);
-		~BitcoinExchange();
-		BitcoinExchange& operator=(const BitcoinExchange& other);
-		double getExchangeRate(const std::string& date) const;
-		
+class BitcoinExchange 
+{
 	private:
-		std::map<std::string, double>* m_prices;
+		std::map<std::string, double>* btcPrices;
 		void copy(const BitcoinExchange& other);
 		void clear();
+	public:
+		BitcoinExchange(const std::string& bitcoinPricesFile);
+		BitcoinExchange(const BitcoinExchange& obg);
+		~BitcoinExchange();
+		BitcoinExchange& operator=(const BitcoinExchange& obg);
+		double getExchangeRate(const std::string& date) const;
 
 };
 

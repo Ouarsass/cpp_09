@@ -6,77 +6,81 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:31:13 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 13:03:54 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/19 17:10:20 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
 // Constructeur de la classe qui lit les prix à partir d'un fichier CSV
-BitcoinExchange::BitcoinExchange(const std::string& bitcoinPricesFile)
-    : m_prices(new std::map<std::string, double>()) {
+BitcoinExchange::BitcoinExchange(const std::string& bitcoinPricesFile) : btcPrices(new std::map<std::string, double>())
+{
     std::ifstream bitcoinFile(bitcoinPricesFile.c_str());
     if (bitcoinFile.fail()) {
-        throw std::runtime_error("Error: Failed to open " + bitcoinPricesFile);
+        throw std::runtime_error("Error: Failed to open the " + bitcoinPricesFile);
     }
     std::string line;
     std::getline(bitcoinFile, line); // Ignore l'entete du fichier CSV
-    while (std::getline(bitcoinFile, line)) {
+    while (std::getline(bitcoinFile, line))
+    {
         std::istringstream ss(line);
-        std::string dateStr;
+        std::string str;
         double price;
-        std::getline(ss, dateStr, '|');
+        std::getline(ss, str, '|');
         ss >> price;
-        (*m_prices)[dateStr] = price;
+        (*btcPrices)[str] = price;
     }
 }
-
-
 // Constructeur de copie qui copie la map
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
-    : m_prices(new std::map<std::string, double>()) {
-    copy(other);
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& obg) : btcPrices(new std::map<std::string, double>())
+{
+    copy(obg);
 }
 
 // Destructeur qui libère la mémoire
-BitcoinExchange::~BitcoinExchange() {
+BitcoinExchange::~BitcoinExchange()
+{
     clear();
-    delete m_prices;
+    delete btcPrices;
 }
-
 // Opérateur d'affectation qui copie la map
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other) {
-    if (this != &other) {
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obg)
+{
+    if (this != &obg)
+    {
         clear();
-        copy(other);
+        copy(obg);
     }
     return *this;
 }
-
 // Méthode qui renvoie le prix à une date donnée
-double BitcoinExchange::getExchangeRate(const std::string& date) const {
-    std::map<std::string, double>::const_iterator it = m_prices->find(date);
-    if (it == m_prices->end()) {
+double BitcoinExchange::getExchangeRate(const std::string& date) const
+{
+    std::map<std::string, double>::const_iterator it = btcPrices->find(date);
+    if (it == btcPrices->end())
+    {
         // Recherche de la date antérieure la plus proche
-        std::map<std::string, double>::const_iterator lower_it = m_prices->lower_bound(date);
-        if (lower_it == m_prices->begin()) {
-            throw std::runtime_error("Error: Bitcoin was not created yet on this date");
-        } else {
+        std::map<std::string, double>::const_iterator lower_it = btcPrices->lower_bound(date);
+        if (lower_it == btcPrices->begin())
+            throw std::runtime_error("Error: the Bitcoin has ben not invalable on this date !");
+        else
+        {
             --lower_it;
             return lower_it->second;
         }
-    } else {
-        return it->second;
     }
+    else
+        return it->second;
 }
 
 // Méthode qui copie la map
-void BitcoinExchange::copy(const BitcoinExchange& other) {
-    *m_prices = *other.m_prices;
+void BitcoinExchange::copy(const BitcoinExchange& other)
+{
+    *btcPrices = *other.btcPrices;
 }
 
 // Méthode qui vide la map
-void BitcoinExchange::clear() {
-    m_prices->clear();
+void BitcoinExchange::clear()
+{
+    btcPrices->clear();
 }
-
