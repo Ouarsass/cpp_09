@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/20 17:31:49 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/20 20:02:58 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,13 @@ bool validDate(std::string date)
     }
     std::string day = date.substr(8, 2);
     std::string month = date.substr(5, 2);
-    if (std::stoi(day) > 31 || std::stoi(day) < 1)
+    std::istringstream sday(day), smonth(month);
+    int nDay, nmount;
+    sday >> nDay;
+    smonth >> nmount;
+    if (nDay > 31 || nDay < 1)
         return false;
-    if (std::stoi(month) > 12 || std::stoi(month) < 1)
+    if (nmount > 12 || nmount < 1)
         return false;
     return true;
 }
