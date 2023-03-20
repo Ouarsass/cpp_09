@@ -6,14 +6,14 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/19 17:32:37 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/20 00:15:00 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
 // Fonction utilitaire pour vérifier si la date est valide
-bool checkDate(std::string date)
+bool validDate(std::string date)
 {
     // Vérifie si la longueur de la date est de 11 caractères
     if (date.length() != 11)
@@ -51,44 +51,53 @@ int     output(char **argv)
         std::cerr << "Error: Failed to open input file" << std::endl;
         return 1;
     }
-    std::string inputLine;
-    while (std::getline(myfile, inputLine))
+    std::string inLine;
+    while (std::getline(myfile, inLine))
     {
         // Ignore les lignes vides, les commentaires et l'en-tête du fichier
-        if (inputLine.empty() || inputLine[0] == '#' || inputLine == "date | value")
+        if (inLine == "date | value" || inLine.empty())
             continue;
         // Extrait la date et la valeur de la ligne d'entrée
         std::string dateStr;
-        double value;
-        std::istringstream ss(inputLine);
+        std::string value;
+        std::istringstream ss(inLine);
         std::getline(ss, dateStr, '|');
         ss >> value;
+        int i = -1, p = 0;
+        while ((value)[++i])
+        {
+            if ((value)[i] == '.')
+                p++;
+            if (p > 1)
+                {std::cerr << "Error: in value !" << std::endl;break;}
+        }
+        if (p > 1)continue;
         // Vérifie si la ligne d'entrée est valide
         if (ss.fail() || dateStr.empty()) {
-            std::cerr << "Error: bad input => " << inputLine << std::endl;
+            std::cerr << "Error: bad input --> " << inLine << std::endl;
             continue;
         }
         // Vérifie si la date entrée est valide
-        if (checkDate(dateStr) == false) {
-            std::cerr << "Error: bad date format." << std::endl;
+        if (validDate(dateStr) == false) {
+            std::cerr << "Error: the date is not exist !" << std::endl;
             continue;
         }
         // Vérifie si la valeur de Bitcoin est positive et inférieure à 1000
-        if (value < 0) {
-            std::cerr << "Error: not a positive number." << std::endl;
+        if (stof(value) < 0) {
+            std::cerr << "Error: is not positive !" << std::endl;
 			continue;
 		}
-		else if (value > 1000)
+		else if (stof(value) > 1000)
 		{
-			std::cerr << "Error: too large a number." << std::endl;
+			std::cerr << "Error: largest number !" << std::endl;
 			continue;
 		}
 		// Calcule le taux de change Bitcoin pour la date donnée, multiplie par la valeur Bitcoin donnée pour obtenir le résultat en USD et affiche le résultat sur la sortie standard
 		try
 		{
-			double exchangeRate = exchange.getExchangeRate(dateStr);
-			double result = value * exchangeRate;
-			std::cout << dateStr << " => " << value << " = " << result << std::endl;
+			double exchangeRate = exchange.changeDate(dateStr);
+			double result = stof(value) * exchangeRate;
+			std::cout << dateStr << " --> " << value << " = " << result << std::endl;
 		}
 		catch (std::exception& e)
 		{
@@ -104,7 +113,7 @@ int main(int argc, char *argv[])
     // Vérifie si l'argument d'entrée est valide
     if (argc != 2)
     {
-        std::cerr << "Error: the file .csv is not exist!" << std::endl;
+        std::cerr << "Error: the file is not exist!" << std::endl;
         return (1);
     }
     // Charge les prix du Bitcoin à partir du fichier CSV

@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:31:13 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/19 17:10:20 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/19 23:48:21 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obg)
     return *this;
 }
 // Méthode qui renvoie le prix à une date donnée
-double BitcoinExchange::getExchangeRate(const std::string& date) const
+double BitcoinExchange::changeDate(const std::string& date) const
 {
     std::map<std::string, double>::const_iterator it = btcPrices->find(date);
     if (it == btcPrices->end())
@@ -74,9 +74,9 @@ double BitcoinExchange::getExchangeRate(const std::string& date) const
 }
 
 // Méthode qui copie la map
-void BitcoinExchange::copy(const BitcoinExchange& other)
+void BitcoinExchange::copy(const BitcoinExchange& obg)
 {
-    *btcPrices = *other.btcPrices;
+    *btcPrices = *obg.btcPrices;
 }
 
 // Méthode qui vide la map
