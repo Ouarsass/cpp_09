@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:27:06 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/18 16:31:45 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/20 00:24:24 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,22 +69,6 @@ void RPN::dataBase(std::string dataBase)
                     break;
             }
         }
-        // Si l'élément est une parenthèse ouvrante, on l'ajoute simplement à la pile.
-        // else if (token[0] == '(')
-        // {
-        //     stocker.push('(');
-        // }
-        // Si l'élément est une parenthèse fermante, on vérifie qu'il y a une parenthèse ouvrante correspondante dans la pile.
-        // Si ce n'est pas le cas, on affiche une erreur. Sinon, on dépile la parenthèse ouvrante.
-    //     else if (token[0] == ')')
-    //     {
-    //         if (stocker.empty() || stocker.top() != '(')
-    //         {
-    //             std::cerr << "Error" << std::endl;
-    //             return;
-    //         }
-    //         stocker.pop();
-    //     }
     }
     // Après avoir parcouru tous les éléments, on vérifie qu'il ne reste qu'une seule opérande dans la pile.
     // Si ce n'est pas le cas, on affiche une erreur. Sinon, on affiche le résultat final.

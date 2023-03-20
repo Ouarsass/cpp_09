@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:26:51 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/19 23:48:34 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:35:19 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ class BitcoinExchange
 		BitcoinExchange(const std::string& bitcoinPricesFile);
 		BitcoinExchange(const BitcoinExchange& obg);
 		~BitcoinExchange();
+		double		changeDate(const std::string& date) const;
 		BitcoinExchange& operator=(const BitcoinExchange& obg);
-		double changeDate(const std::string& date) const;
 
 };
 

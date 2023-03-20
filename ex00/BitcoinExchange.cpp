@@ -6,13 +6,12 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:31:13 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/19 23:48:21 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/20 17:34:35 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-// Constructeur de la classe qui lit les prix à partir d'un fichier CSV
 BitcoinExchange::BitcoinExchange(const std::string& bitcoinPricesFile) : btcPrices(new std::map<std::string, double>())
 {
     std::ifstream bitcoinFile(bitcoinPricesFile.c_str());
@@ -31,19 +30,16 @@ BitcoinExchange::BitcoinExchange(const std::string& bitcoinPricesFile) : btcPric
         (*btcPrices)[str] = price;
     }
 }
-// Constructeur de copie qui copie la map
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& obg) : btcPrices(new std::map<std::string, double>())
 {
     copy(obg);
 }
 
-// Destructeur qui libère la mémoire
 BitcoinExchange::~BitcoinExchange()
 {
     clear();
     delete btcPrices;
 }
-// Opérateur d'affectation qui copie la map
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obg)
 {
     if (this != &obg)
@@ -52,6 +48,16 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& obg)
         copy(obg);
     }
     return *this;
+}
+void BitcoinExchange::clear()
+{
+    btcPrices->clear();
+}
+
+// Méthode qui copie la map
+void BitcoinExchange::copy(const BitcoinExchange& obg)
+{
+    *btcPrices = *obg.btcPrices;
 }
 // Méthode qui renvoie le prix à une date donnée
 double BitcoinExchange::changeDate(const std::string& date) const
@@ -71,16 +77,4 @@ double BitcoinExchange::changeDate(const std::string& date) const
     }
     else
         return it->second;
-}
-
-// Méthode qui copie la map
-void BitcoinExchange::copy(const BitcoinExchange& obg)
-{
-    *btcPrices = *obg.btcPrices;
-}
-
-// Méthode qui vide la map
-void BitcoinExchange::clear()
-{
-    btcPrices->clear();
 }
