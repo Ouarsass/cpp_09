@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/21 19:42:01 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/21 20:16:50 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ int     output(char **argv)
 			double exchangeRate = exchange.changeDate(dateStr);
 			double result = stof(value) * exchangeRate;
 			std::cout << dateStr << " --> " << value << " = " << result << std::endl;
-		}
-		catch (std::exception& e)
-		{
+		}catch (std::exception& e){
 			std::cerr << e.what() << std::endl;
 			continue;
 		}
