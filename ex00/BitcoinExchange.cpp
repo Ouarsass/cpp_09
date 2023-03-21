@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:31:13 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/20 20:27:00 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/21 17:54:43 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 BitcoinExchange::BitcoinExchange(const std::string& bitcoinPricesFile) : btcPrices(new std::map<std::string, double>())
 {
     std::ifstream bitcoinFile(bitcoinPricesFile.c_str());
-    if (bitcoinFile.fail()) {
+    if (bitcoinFile.fail())
+    {
         // throw std::runtime_error("Error: Failed to open the " + bitcoinPricesFile);
         std::cerr << "Error: Failed to open the file "<< bitcoinPricesFile << std::endl;
         exit(1);
