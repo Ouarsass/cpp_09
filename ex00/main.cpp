@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/20 20:02:58 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/21 19:42:01 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ bool validDate(std::string date)
     std::string day = date.substr(8, 2);
     std::string month = date.substr(5, 2);
     std::istringstream sday(day), smonth(month);
-    int nDay, nmount;
-    sday >> nDay;
-    smonth >> nmount;
-    if (nDay > 31 || nDay < 1)
+    int daily, monthly;
+    sday >> daily;
+    smonth >> monthly;
+    if (daily > 31 || daily < 1)
         return false;
-    if (nmount > 12 || nmount < 1)
+    if (monthly > 12 || monthly < 1)
         return false;
     return true;
 }
@@ -66,15 +66,15 @@ int     output(char **argv)
                 {std::cerr << "Error: in value !" << std::endl;break;}
         }
         if (p > 1)continue;
-        if (ss.fail() || dateStr.empty()) {
+        if (ss.fail() || dateStr.empty()){
             std::cerr << "Error: bad input --> " << inLine << std::endl;
             continue;
         }
-        if (validDate(dateStr) == false) {
+        if (validDate(dateStr) == false){
             std::cerr << "Error: the date is not exist !" << std::endl;
             continue;
         }
-        if (stof(value) < 0) {
+        if (stof(value) < 0){
             std::cerr << "Error: is not positive !" << std::endl;
 			continue;
 		}
@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "Error: the file is not exist!" << std::endl;
+        std::cerr << "\033[91mError: the file is not exist!" << std::endl;
         return (1);
     }
     // Charge les prix du Bitcoin à partir du fichier CSV
