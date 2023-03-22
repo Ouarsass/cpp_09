@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/21 20:16:50 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/22 22:28:59 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,27 @@ bool validDate(std::string date)
     return true;
 }
 
+int checkValue(std::string value)
+{
+    for(int e = 0; value[e];e++)
+    {
+        if (value[e] == '.' && (!isdigit(value[e-1]) || !isdigit(value[e+1])))
+        {
+            std::cerr << "Error: bad value" << std::endl;
+            return 0;
+        }
+        else if (!isdigit(value[e]) && value[e] != '.')
+        {
+            std::cerr << "Error: bad value" << std::endl;
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int     output(char **argv)
 {
+    bool first = true;
     BitcoinExchange exchange("data.csv");
     std::ifstream myfile(argv[1]);
     if (myfile.fail())
@@ -50,20 +69,27 @@ int     output(char **argv)
     std::string inLine;
     while (std::getline(myfile, inLine))
     {
-        if (inLine == "date | value" || inLine.empty())
+        if ((first && (inLine == "date | value")) || inLine.empty())
+        {
+            first = false;   
             continue;
+        }
         std::string dateStr;
         std::string value;
         std::istringstream ss(inLine);
+        //// count pipes and hiphens '-'
         std::getline(ss, dateStr, '|');
         ss >> value;
+        if (!checkValue(value))
+            continue;
+            
         int i = -1, p = 0;
         while ((value)[++i])
         {
             if ((value)[i] == '.')
                 p++;
             if (p > 1)
-                {std::cerr << "Error: in value !" << std::endl;break;}
+                {std::cerr << "Error: bad value !" << std::endl;break;}
         }
         if (p > 1)continue;
         if (ss.fail() || dateStr.empty()){
@@ -74,20 +100,21 @@ int     output(char **argv)
             std::cerr << "Error: the date is not exist !" << std::endl;
             continue;
         }
-        if (stof(value) < 0){
+        if (atof(value.c_str()) < 0){
             std::cerr << "Error: is not positive !" << std::endl;
 			continue;
 		}
-		else if (stof(value) > 1000)
+		else if (atof(value.c_str()) > 1000)
 		{
 			std::cerr << "Error: largest number !" << std::endl;
 			continue;
 		}
 		// Calcule le taux de change Bitcoin pour la date donnée, multiplie par la valeur Bitcoin donnée pour obtenir le résultat en USD et affiche le résultat sur la sortie standard
+        first = false;
 		try
 		{
 			double exchangeRate = exchange.changeDate(dateStr);
-			double result = stof(value) * exchangeRate;
+			double result = atof(value.c_str()) * exchangeRate;
 			std::cout << dateStr << " --> " << value << " = " << result << std::endl;
 		}catch (std::exception& e){
 			std::cerr << e.what() << std::endl;

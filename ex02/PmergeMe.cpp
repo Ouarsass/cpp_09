@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/22 18:26:00 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:40:35 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 	std::clock_t dequeStart = std::clock();
 	this->sort(this->dq);
 	std::clock_t dequeEnd = std::clock();
-	std::cout << "After : " ;
+	std::cout << "After  : " ;
 	this->print(this->vec);
 	double vTiming = (double)(vectorEnd - vectorStart) / 1000;
 	double dTiming = (double)(dequeEnd - dequeStart) / 1000;
@@ -100,11 +100,11 @@ void PmergeMe::insert_sort(T &container)
 	{
 		for(int j = 0; j < (int)container.size() - 1; j++)
 		{
-			if(container[j] > container[j + 1])
+			if(container[j] > container[j + true])
 			{
 				int temporair = container[j];
-				container[j] = container[j + 1];
-				container[j + 1] = temporair;
+				container[j] = container[j + true];
+				container[j + true] = temporair;
 			}
 		}
 	}
@@ -113,20 +113,18 @@ void PmergeMe::insert_sort(T &container)
 template <typename T>
 void PmergeMe::marge(T &container, T &left, T &right)
 {
-	int i = 0;
-	int j = 0;
-	int k = 0;
+	int i = 0, j = 0, x = 0;
 	while (i < (int)left.size() && j < (int)right.size())
 	{
 		if (left[i] < right[j])
-			container[k++] = left[i++];
+			container[x++] = left[i++];
 		else
-			container[k++] = right[j++];
+			container[x++] = right[j++];
 	}
 	while (i < (int)left.size())
-		container[k++] = left[i++];
+		container[x++] = left[i++];
 	while (j < (int)right.size())
-		container[k++] = right[j++];
+		container[x++] = right[j++];
 }
 
 template <typename T>
