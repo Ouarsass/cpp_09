@@ -3,22 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/18 00:29:55 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/22 04:22:03 by mustapha         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:29:23 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-int main(int ac, char **av)
+int main(int argc, char *argv[])
 {
-    if(ac < 2)
-    {
-        std::cout << "Error" << std::endl;
-        return 0;
-    }
-    PmergeMe pmergeme(ac, av);
-    return 0;
+    if(argc < 2)
+        {std::cerr << "Error" << std::endl;return (1);}
+    PmergeMe pmergeme(argc, argv);
+    return (0);
 }

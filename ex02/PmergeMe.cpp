@@ -3,73 +3,70 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/22 04:23:30 by mustapha         ###   ########.fr       */
+/*   Updated: 2023/03/22 18:26:00 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-
-PmergeMe::PmergeMe(int ac, char **av)
+PmergeMe::PmergeMe(int argc, char *argv[])
 {
-	for (int i = 1; i < ac; i++)
+	for (int i = 1; i < argc; i++)
 	{
-		int num = this->check(av[i]);
-		if (num == -1)
-			return ;
-		this->_deque.push_back(num);
-		this->_vector.push_back(num);
+		int nbr = this->check(argv[i]);
+		if (nbr == -1)
+			return;
+		this->dq.push_back(nbr);
+		this->vec.push_back(nbr);
 	}
 	std::cout << "Before : " ;
-	this->print(this->_deque);
-	std::clock_t vstart = std::clock();
-	this->sort(this->_vector);
-	std::clock_t vend = std::clock();
-	std::clock_t dstart = std::clock();
-	this->sort(this->_deque);
-	std::clock_t dend = std::clock();
+	this->print(this->dq);
+	std::clock_t vectorStart = std::clock();
+	this->sort(this->vec);
+	std::clock_t vectorEnd = std::clock();
+	std::clock_t dequeStart = std::clock();
+	this->sort(this->dq);
+	std::clock_t dequeEnd = std::clock();
 	std::cout << "After : " ;
-	this->print(this->_vector);
-	
-	double vduration = (double)(vend - vstart) / 1000;
-	double dduration = (double)(dend - dstart) / 1000;
-	std::cout << "Time to process a range of " << this->_vector.size() << " elements with std::vector " << vduration << " us " << std::endl;
-	std::cout << "Time to process a range of " << this->_deque.size() << " elements with std::deque " << dduration << " us "  << std::endl;
+	this->print(this->vec);
+	double vTiming = (double)(vectorEnd - vectorStart) / 1000;
+	double dTiming = (double)(dequeEnd - dequeStart) / 1000;
+	std::cout << "Time to process a range of " << this->vec.size() << " elements with std::vector " << vTiming << " us " << std::endl;
+	std::cout << "Time to process a range of " << this->dq.size() << " elements with std::deque " << dTiming << " us "  << std::endl;
 }
 
-PmergeMe::PmergeMe(const PmergeMe &copy){*this = copy;}
-
-PmergeMe::~PmergeMe(){}
-
-PmergeMe & PmergeMe::operator=(const PmergeMe &assign)
+PmergeMe & PmergeMe::operator=(const PmergeMe &obg)
 {
-	this->_deque = assign._deque;
-	this->_vector = assign._vector;
+	this->dq = obg.dq;
+	this->vec = obg.vec;
 	return *this;
 }
+PmergeMe::PmergeMe(const PmergeMe &obg)
+{
+	*this = obg;
+}
 
+PmergeMe::~PmergeMe()
+{}
 
 int PmergeMe::check(std::string str)
 {
-	int i = 0;
-	while (str[i])
+	int i = -1;
+	while (str[++i])
 	{
 		if (str[i] < '0' || str[i] > '9')
 		{
-			std::cout << "Error" << std::endl;
+			std::cerr << "Error" << std::endl;
 			return -1;
 		}
-		i++;
 	}
 	try
 	{
 		return std::stoi(str);
-	}
-	catch(const std::exception& e)
-	{
+	}catch(const std::exception& e){
 		std::cerr << "Error" << std::endl;
 	}
 	return -1;
@@ -105,9 +102,9 @@ void PmergeMe::insert_sort(T &container)
 		{
 			if(container[j] > container[j + 1])
 			{
-				int temp = container[j];
+				int temporair = container[j];
 				container[j] = container[j + 1];
-				container[j + 1] = temp;
+				container[j + 1] = temporair;
 			}
 		}
 	}
