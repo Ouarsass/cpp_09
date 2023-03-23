@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/22 22:28:59 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/23 18:22:14 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ int checkValue(std::string value)
     {
         if (value[e] == '.' && (!isdigit(value[e-1]) || !isdigit(value[e+1])))
         {
-            std::cerr << "Error: bad value" << std::endl;
+            std::cerr << "Error: bad value !" << std::endl;
             return 0;
         }
         else if (!isdigit(value[e]) && value[e] != '.')
         {
-            std::cerr << "Error: bad value" << std::endl;
+            std::cerr << "Error: bad value !" << std::endl;
             return 0;
         }
     }
@@ -62,10 +62,7 @@ int     output(char **argv)
     BitcoinExchange exchange("data.csv");
     std::ifstream myfile(argv[1]);
     if (myfile.fail())
-    {
-        std::cerr << "Error: Failed to open input file" << std::endl;
-        return 1;
-    }
+        {std::cerr << "Error: Failed to open input file" << std::endl;return(1);}
     std::string inLine;
     while (std::getline(myfile, inLine))
     {
@@ -77,12 +74,10 @@ int     output(char **argv)
         std::string dateStr;
         std::string value;
         std::istringstream ss(inLine);
-        //// count pipes and hiphens '-'
         std::getline(ss, dateStr, '|');
         ss >> value;
         if (!checkValue(value))
             continue;
-            
         int i = -1, p = 0;
         while ((value)[++i])
         {
@@ -128,11 +123,11 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "\033[91mError: the file is not exist!" << std::endl;
+        std::cerr << "\033[91mError: the file is not exist !" << std::endl;
+        std::cerr << "And the programe takes tow arguments !" << std::endl;
         return (1);
     }
     // Charge les prix du Bitcoin à partir du fichier CSV
-    // BitcoinExchange exchange("data.csv");
     output(argv);
     return 0;
 }
