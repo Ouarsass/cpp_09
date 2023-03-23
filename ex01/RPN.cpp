@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:27:06 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/22 22:38:37 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/23 17:59:20 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,16 +58,9 @@ void RPN::dataBase(std::string dataBase)
             }
         }
          else
-        {
-            std::cerr << "Error" << std::endl;
-            exit(1);
-        }
+            {std::cerr << "Error" << std::endl;exit(1);}
     }
     if(stocker.size() != 1)
         {std::cerr << "Error: in syntax" << std::endl;exit(1);}
     std::cout << stocker.top() << std::endl;
 }
-//     if (stocker.size() != 1)
-//         {std::cerr << "Error: in syntax" << std::endl;return;}
-//     std::cout << stocker.top() << std::endl;
-// }

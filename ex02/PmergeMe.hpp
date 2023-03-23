@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:31:02 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 00:55:35 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:01:15 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <vector>
 #include <deque>
 #include <chrono>
-#include<sstream>
+#include <sstream>
 
 class PmergeMe
 {
@@ -30,15 +30,13 @@ class PmergeMe
 		~PmergeMe();
 		PmergeMe(const PmergeMe &obg);
 		PmergeMe &operator=(const PmergeMe &obg);
-		int check(std::string str);
 		template <typename T>
-		void print(T &container);
+		void printingNbr(T &container);
 		template <typename T>
 		void sort(T &container);
 		template <typename T>
-		void marge(T &container, T &left, T &right);
-		template <typename T>
-		void insert_sort(T &container);
+		void insertSorting(T &container);
+		int checkIsInt(std::string str);
 		
 };
 

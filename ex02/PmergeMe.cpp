@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 01:01:47 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/23 16:37:30 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 {
 	for (int i = 1; i < argc; i++)
 	{
-		int nbr = this->check(argv[i]);
+		int nbr = this->checkIsInt(argv[i]);
 		if (nbr == -1)
 			return;
 		this->dq.push_back(nbr);
 		this->vec.push_back(nbr);
 	}
 	std::cout << "Before : " ;
-	this->print(this->dq);
+	this->printingNbr(this->dq);
 	std::clock_t vectorStart = std::clock();
 	this->sort(this->vec);
 	std::clock_t vectorEnd = std::clock();
@@ -31,28 +31,14 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 	this->sort(this->dq);
 	std::clock_t dequeEnd = std::clock();
 	std::cout << "After  : " ;
-	this->print(this->vec);
+	this->printingNbr(this->vec);
 	double vTiming = (double)(vectorEnd - vectorStart) / 1000;
 	double dTiming = (double)(dequeEnd - dequeStart) / 1000;
 	std::cout << "Time to process a range of " << this->vec.size() << " elements with std::vector " << vTiming << " us " << std::endl;
 	std::cout << "Time to process a range of " << this->dq.size() << " elements with std::deque " << dTiming << " us "  << std::endl;
 }
 
-PmergeMe & PmergeMe::operator=(const PmergeMe &obg)
-{
-	this->dq = obg.dq;
-	this->vec = obg.vec;
-	return *this;
-}
-PmergeMe::PmergeMe(const PmergeMe &obg)
-{
-	*this = obg;
-}
-
-PmergeMe::~PmergeMe()
-{}
-
-int PmergeMe::check(std::string str)
+int PmergeMe::checkIsInt(std::string str)
 {
 	int i = -1;
 	while (str[++i])
@@ -64,15 +50,26 @@ int PmergeMe::check(std::string str)
 		}
 	}
 	std::istringstream ss(str);
-	int intiger;
-	ss >> intiger;
+	int nbr;
+	ss >> nbr;
 	if (ss.fail())
 		return(-1);
-	return (intiger);
+	return (nbr);
 }
-
+PmergeMe &PmergeMe::operator=(const PmergeMe &obg)
+{
+	this->dq = obg.dq;
+	this->vec = obg.vec;
+	return *this;
+}
+PmergeMe::PmergeMe(const PmergeMe &obg)
+{
+	*this = obg;
+}
+PmergeMe::~PmergeMe()
+{}
 template <typename T>
-void PmergeMe::print(T &container)
+void PmergeMe::printingNbr(T &container)
 {
 	if(container.size() <= 5)
 	{
@@ -93,7 +90,7 @@ void PmergeMe::print(T &container)
 }
 
 template <typename T>
-void PmergeMe::insert_sort(T &container)
+void PmergeMe::insertSorting(T &container)
 {
 	for(int i = 0; i < (int)container.size(); i++)
 	{
@@ -108,41 +105,34 @@ void PmergeMe::insert_sort(T &container)
 		}
 	}
 }
-
-template <typename T>
-void PmergeMe::marge(T &container, T &left, T &right)
-{
-	int i = 0, j = 0, x = 0;
-	while (i < (int)left.size() && j < (int)right.size())
-	{
-		if (left[i] < right[j])
-			container[x++] = left[i++];
-		else
-			container[x++] = right[j++];
-	}
-	while (i < (int)left.size())
-		container[x++] = left[i++];
-	while (j < (int)right.size())
-		container[x++] = right[j++];
-}
-
 template <typename T>
 void PmergeMe::sort(T &container)
 {
 	int size = container.size();
 	if (size <= 10)
 	{
-		insert_sort(container);
+		insertSorting(container);
 		return ;
 	}
-	int mid = size / 2;// 7 / 2 = 3;
-	T left(mid);// 3;
-	T right(size - mid);// 7 - 3 = 4; 3 + 1;
-	for (int i = 0; i < mid; i++)
-		left[i] = container[i];
-	for (int i = mid; i < size; i++)
-		right[i - mid] = container[i];
-	sort(left);
-	sort(right);
-	marge(container, left, right);
+	int middel = size / 2;// 7 / 2 = 3;
+	T L(middel);// 3;
+	T R(size - middel);// 7 - 3 = 4; 3 + 1;
+	for (int i = 0; i < middel; i++)
+		L[i] = container[i];
+	for (int i = middel; i < size; i++)
+		R[i - middel] = container[i];
+	sort(L);
+	sort(R);
+	int i = 0, j = 0, x = 0;
+	while (i < (int)L.size() && j < (int)R.size())
+	{
+		if (L[i] < R[j])
+			container[x++] = L[i++];
+		else
+			container[x++] = R[j++];
+	}
+	while (i < (int)L.size())
+		container[x++] = L[i++];
+	while (j < (int)R.size())
+		container[x++] = R[j++];
 }
