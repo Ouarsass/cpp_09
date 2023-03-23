@@ -1,5 +1,5 @@
 NAME = btc
-CPPFLAG = -Wall -Wextra -Werror -std=c++98
+CPPFLAG = -Wall -Wextra -Werror -std=c++98 -g
 R = '\033[91m'
 G = '\033[92m'
 SRCS =  BitcoinExchange.cpp \
