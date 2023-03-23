@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/22 18:40:35 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/23 01:01:47 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,12 @@ int PmergeMe::check(std::string str)
 			return -1;
 		}
 	}
-	try
-	{
-		return std::stoi(str);
-	}catch(const std::exception& e){
-		std::cerr << "Error" << std::endl;
-	}
-	return -1;
+	std::istringstream ss(str);
+	int intiger;
+	ss >> intiger;
+	if (ss.fail())
+		return(-1);
+	return (intiger);
 }
 
 template <typename T>
@@ -136,9 +135,9 @@ void PmergeMe::sort(T &container)
 		insert_sort(container);
 		return ;
 	}
-	int mid = size / 2;
-	T left(mid);
-	T right(size - mid);
+	int mid = size / 2;// 7 / 2 = 3;
+	T left(mid);// 3;
+	T right(size - mid);// 7 - 3 = 4; 3 + 1;
 	for (int i = 0; i < mid; i++)
 		left[i] = container[i];
 	for (int i = mid; i < size; i++)
