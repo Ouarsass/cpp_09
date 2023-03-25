@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 21:58:23 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/24 21:46:53 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 	for(int i=1; i < argc; i++)
 		std::cout << argv[i] << " ";
 	std::cout << std::endl;
-	//this->printingNbr(this->dq);
 	std::clock_t vectorStart = std::clock();
 	this->sort(this->vec);
 	std::clock_t vectorEnd = std::clock();
@@ -37,11 +36,10 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 	for(std::vector<int>::iterator it = this->vec.begin() ; it != this->vec.end() ; it++)
 		std::cout << *it << " ";
 	std::cout << std::endl;
-	//this->printingNbr(this->vec);
-	double vTiming = (double)(vectorEnd - vectorStart) / 1000;
-	double dTiming = (double)(dequeEnd - dequeStart) / 1000;
-	std::cout << "Time to process a range of " << this->vec.size() << " elements with std::vector " << vTiming << " us " << std::endl;
-	std::cout << "Time to process a range of " << this->dq.size() << " elements with std::deque " << dTiming << " us "  << std::endl;
+	double vecTimeInMicrosecondes = (double)(vectorEnd - vectorStart);
+	double deqTimeInMicrosecondes = (double)(dequeEnd - dequeStart);
+	std::cout << "Time to process a range of " << this->vec.size() << " elements with std::vector " << vecTimeInMicrosecondes << " us " << std::endl;
+	std::cout << "Time to process a range of " << this->dq.size() << " elements with std::deque " << deqTimeInMicrosecondes << " us "  << std::endl;
 }
 
 int PmergeMe::checkIsInt(std::string str)

@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 18:22:14 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/24 22:06:16 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,11 +95,11 @@ int     output(char **argv)
             std::cerr << "Error: the date is not exist !" << std::endl;
             continue;
         }
-        if (atof(value.c_str()) < 0){
+        if (std::atof(value.c_str()) < 0){
             std::cerr << "Error: is not positive !" << std::endl;
 			continue;
 		}
-		else if (atof(value.c_str()) > 1000)
+		else if (std::atof(value.c_str()) > 1000)
 		{
 			std::cerr << "Error: largest number !" << std::endl;
 			continue;
@@ -109,7 +109,7 @@ int     output(char **argv)
 		try
 		{
 			double exchangeRate = exchange.changeDate(dateStr);
-			double result = atof(value.c_str()) * exchangeRate;
+			double result = std::atof(value.c_str()) * exchangeRate;
 			std::cout << dateStr << " --> " << value << " = " << result << std::endl;
 		}catch (std::exception& e){
 			std::cerr << e.what() << std::endl;
