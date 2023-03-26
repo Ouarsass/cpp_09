@@ -5,6 +5,7 @@ G = '\033[92m'
 SRCS =  PmergeMe.cpp \
 		main.cpp
 OBJS = $(SRCS:.cpp=.o)
+
 all:$(NAME)
 $(NAME) : $(OBJS)
 	c++ $(CPPFLAG) $(OBJS) -o $(NAME)
@@ -18,4 +19,5 @@ fclean: clean
 	rm -f $(NAME)
 	@echo $(R) "$(NAME) has ben deleted !" $(NONE)
 re : fclean all
+
 .PHONY: all clean fclean re

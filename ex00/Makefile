@@ -1,7 +1,7 @@
 NAME = btc
-CPPFLAG = -Wall -Wextra -Werror -std=c++98 -g
 R = '\033[91m'
 G = '\033[92m'
+CPPFLAG = -Wall -Wextra -Werror -std=c++98
 SRCS =  BitcoinExchange.cpp \
 		main.cpp
 OBJS = $(SRCS:.cpp=.o)
