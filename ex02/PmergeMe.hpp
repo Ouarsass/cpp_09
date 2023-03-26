@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:31:02 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 16:01:15 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 13:23:29 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ class PmergeMe
 		void sort(T &container);
 		template <typename T>
 		void insertSorting(T &container);
-		int checkIsInt(std::string str);
-		
+		int checkIsInt(std::string str);	
 };
 
 #endif
