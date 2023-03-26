@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/24 21:46:53 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 02:43:53 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 PmergeMe::PmergeMe(int argc, char *argv[])
 {
-	for (int i = 1; i < argc; i++)
+	for (int i =1; i < argc; i++)
 	{
 		int nbr = this->checkIsInt(argv[i]);
 		if (nbr == -1)
@@ -41,7 +41,6 @@ PmergeMe::PmergeMe(int argc, char *argv[])
 	std::cout << "Time to process a range of " << this->vec.size() << " elements with std::vector " << vecTimeInMicrosecondes << " us " << std::endl;
 	std::cout << "Time to process a range of " << this->dq.size() << " elements with std::deque " << deqTimeInMicrosecondes << " us "  << std::endl;
 }
-
 int PmergeMe::checkIsInt(std::string str)
 {
 	int i = -1;
