@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:27:06 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 17:59:20 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 01:57:28 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ void RPN::dataBase(std::string dataBase)
         else if (stocker.size() >= 2 && (dataBase[i] == '*' || dataBase[i] == '/' || dataBase[i] == '+' || dataBase[i] == '-'))
         {
             float second = stocker.top();
-            // std::cout <<second<<" ---------here\n";
             stocker.pop();
             float first = stocker.top();
-            // std::cout <<first<<" ---------here===> \n";
             stocker.pop();
             switch (dataBase[i])
             {

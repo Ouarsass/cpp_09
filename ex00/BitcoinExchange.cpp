@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/15 20:31:13 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/23 22:06:18 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 01:52:30 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ double BitcoinExchange::changeDate(const std::string& date) const
     if (itr == btcPrices->end())
     {
         std::map<std::string, double>::const_iterator ptr = btcPrices->lower_bound(date);
-        // std::cout << ptr->first <<"--------" << std::endl;
         if (ptr == btcPrices->begin())
             throw std::runtime_error("Error: the Bitcoin has ben not invalable on this date !");
         else

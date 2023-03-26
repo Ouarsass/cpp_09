@@ -6,7 +6,7 @@
 /*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/24 22:06:16 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 01:45:03 by mouarsas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,6 @@ int     output(char **argv)
 			std::cerr << "Error: largest number !" << std::endl;
 			continue;
 		}
-		// Calcule le taux de change Bitcoin pour la date donnée, multiplie par la valeur Bitcoin donnée pour obtenir le résultat en USD et affiche le résultat sur la sortie standard
         first = false;
 		try
 		{
@@ -127,7 +126,6 @@ int main(int argc, char *argv[])
         std::cerr << "And the programe takes tow arguments !" << std::endl;
         return (1);
     }
-    // Charge les prix du Bitcoin à partir du fichier CSV
     output(argv);
     return 0;
 }
