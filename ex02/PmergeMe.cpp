@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/17 18:30:43 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/26 02:43:53 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:01:32 by mustapha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,9 +96,9 @@ void PmergeMe::sort(T &container)
 		insertSorting(container);
 		return ;
 	}
-	int middel = size / 2;// 7 / 2 = 3;
+	int middel = size / 2;// 6 / 2 = 3;
 	T L(middel);// 3;
-	T R(size - middel);// 7 - 3 = 4; 3 + 1;
+	T R(size - middel);// 6 - 3 = 3;
 	for (int i = 0; i < middel; i++)
 		L[i] = container[i];
 	for (int i = middel; i < size; i++)

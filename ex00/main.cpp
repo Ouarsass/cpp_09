@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mouarsas <mouarsas@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mustapha <mustapha@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/14 18:38:54 by mouarsas          #+#    #+#             */
-/*   Updated: 2023/03/26 02:46:49 by mouarsas         ###   ########.fr       */
+/*   Updated: 2023/03/26 06:18:55 by mustapha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int checkValue(std::string value)
 int     output(char **argv)
 {
     bool first = true;
-    BitcoinExchange exchange("data.csv");
+    BitcoinExchange PriceBtc("data.csv");
     std::ifstream myfile(argv[1]);
     if (myfile.fail())
         {std::cerr << "Error: Failed to open input file" << std::endl;return(1);}
@@ -105,7 +105,7 @@ int     output(char **argv)
         first = false;
 		try
 		{
-			double exchangeRate = exchange.changeDate(dateStr);
+			double exchangeRate = PriceBtc.changeDate(dateStr);
 			double result = std::atof(value.c_str()) * exchangeRate;
 			std::cout << dateStr << " --> " << value << " = " << result << std::endl;
 		}catch (std::exception& e){
